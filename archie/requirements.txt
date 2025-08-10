@@ -1,0 +1,44 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+sqlite-utils
+cryptography
+httpx
+python-multipart
+passlib[bcrypt]
+python-jose[cryptography]
+pytest
+pytest-asyncio
+pytest-cov
+pytest-mock
+coverage[toml]
+pydantic-settings
+schedule
+jinja2
+
+# New dependencies for enhanced features
+pyjwt
+python-dateutil
+websockets
+orjson
+tenacity
+humanize
+aiosqlite
+aiofiles
+
+# OCR and document processing
+pillow
+pytesseract
+pdfminer.six
+pypdf
+python-magic
+
+# RRULE scheduling
+python-rrule
+rrule
+
+# Image processing
+imagemagick
+
+# Optional dependencies
+# sqlite-vss  # For vector search (if enabled)

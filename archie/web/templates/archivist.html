@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archie Memory Vault - Digital Archive & Intelligence</title>
+    <link rel="stylesheet" href="/static/css/archivist.css">
+    <script src="https://unpkg.com/heroicons@2.0.18/24/outline/index.js" type="module"></script>
+    <link rel="icon" href="/static/images/archie-logo-color.svg" type="image/svg+xml">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">
+                    <img src="/static/images/archie-logo-color.svg" alt="Archie Memory Vault" class="logo-svg">
+                </span>
+                <div class="logo-text">
+                    <h1>Archie</h1>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="system-status" id="systemStatus">
+                    <span class="status-indicator online" id="statusIndicator"></span>
+                    <span id="statusText">Online</span>
+                </div>
+                <button class="btn btn-primary" id="uploadBtn">
+                    <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                    </svg>
+                    Upload Files
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="nav-menu">
+                <button class="nav-item active" data-section="dashboard">
+                    <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                    Dashboard
+                </button>
+                <button class="nav-item" data-section="memories">
+                    <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                    Memory Archive
+                </button>
+                <button class="nav-item" data-section="files">
+                    <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+                    </svg>
+                    File Vault
+                </button>
+                <button class="nav-item" data-section="system">
+                    <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                    </svg>
+                    Backups
+                </button>
+                <button class="nav-item" data-section="search">
+                    <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    Search
+                </button>
+                <button class="nav-item vault-mode" data-section="vault">
+                    <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    Vault Mode
+                </button>
+            </nav>
+
+            <!-- Archive Collections -->
+            <div class="plugin-section">
+                <h3>
+                    <svg class="icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                    </svg>
+                    Collections
+                </h3>
+                <div class="plugin-grid" id="pluginGrid">
+                    <!-- Dynamic collection buttons -->
+                </div>
+            </div>
+
+            <!-- Vault Overview -->
+            <div class="storage-overview">
+                <h3>
+                    <svg class="icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                    Vault Status
+                </h3>
+                <div class="storage-stats" id="storageStats">
+                    <div class="stat-item">
+                        <span class="stat-label">Archived</span>
+                        <span class="stat-value" id="totalInsights">--</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Secured</span>
+                        <span class="stat-value" id="totalSize">--</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Indexed</span>
+                        <span class="stat-value" id="totalMemories">--</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="content-section active">
+                <!-- Insight Banner -->
+                <div class="insight-banner">
+                    <div class="insight-content">
+                        <div class="insight-text">
+                            <h3>Archive Analytics</h3>
+                            <p id="insightSummary">You archived 19 files this week. Most common tags: <span class="tag-pill">finance</span>, <span class="tag-pill">planner</span></p>
+                        </div>
+                        <div class="insight-actions">
+                            <button class="btn btn-secondary btn-sm" id="backupNowBtn">
+                                <svg class="icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                                Backup Now
+                            </button>
+                        </div>
+                    </div>
+                    <div class="insight-timeline" id="timelineChart">
+                        <!-- Mini timeline visualization -->
+                    </div>
+                </div>
+
+                <!-- Memory Blocks Section -->
+                <div class="section-header">
+                    <h2>Memory Blocks</h2>
+                    <p>Your organized data collections with intelligent insights</p>
+                </div>
+
+                <!-- Memory Blocks Grid -->
+                <div class="memory-blocks-grid" id="memoryBlocksGrid">
+                    <div class="memory-block" data-plugin="reminders">
+                        <div class="memory-block-header">
+                            <div class="memory-block-icon">
+                                <svg class="icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                            </div>
+                            <div class="memory-block-info">
+                                <h3>Reminders</h3>
+                                <span class="file-count">13 files</span>
+                            </div>
+                        </div>
+                        <div class="memory-block-latest">
+                            <span class="latest-label">Latest:</span>
+                            <span class="latest-file">reminders_2025-08-05.json</span>
+                        </div>
+                        <div class="memory-block-tags">
+                            <span class="tag-pill">tasks</span>
+                            <span class="tag-pill">schedule</span>
+                        </div>
+                    </div>
+
+                    <div class="memory-block" data-plugin="calendar">
+                        <div class="memory-block-header">
+                            <div class="memory-block-icon">
+                                <svg class="icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div class="memory-block-info">
+                                <h3>Calendar</h3>
+                                <span class="file-count">19 files</span>
+                            </div>
+                        </div>
+                        <div class="memory-block-latest">
+                            <span class="latest-label">Latest:</span>
+                            <span class="latest-file">calendar_Q3.pdf</span>
+                        </div>
+                        <div class="memory-block-tags">
+                            <span class="tag-pill">meetings</span>
+                            <span class="tag-pill">events</span>
+                        </div>
+                    </div>
+
+                    <div class="memory-block" data-plugin="media">
+                        <div class="memory-block-header">
+                            <div class="memory-block-icon">
+                                <svg class="icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div class="memory-block-info">
+                                <h3>Media</h3>
+                                <span class="file-count">42 files</span>
+                            </div>
+                        </div>
+                        <div class="memory-block-latest">
+                            <span class="latest-label">Latest:</span>
+                            <span class="latest-file">gym-photo-0725.jpg</span>
+                        </div>
+                        <div class="memory-block-tags">
+                            <span class="tag-pill">photos</span>
+                            <span class="tag-pill">fitness</span>
+                        </div>
+                    </div>
+
+                    <div class="memory-block" data-plugin="finance">
+                        <div class="memory-block-header">
+                            <div class="memory-block-icon">
+                                <svg class="icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                                </svg>
+                            </div>
+                            <div class="memory-block-info">
+                                <h3>Finance</h3>
+                                <span class="file-count">8 files</span>
+                            </div>
+                        </div>
+                        <div class="memory-block-latest">
+                            <span class="latest-label">Latest:</span>
+                            <span class="latest-file">budget_august.xlsx</span>
+                        </div>
+                        <div class="memory-block-tags">
+                            <span class="tag-pill">budget</span>
+                            <span class="tag-pill">expenses</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- File Browser Section -->
+            <section id="files-section" class="content-section">
+                <div class="section-header">
+                    <h2>
+                        <svg class="icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/>
+                        </svg>
+                        File Vault
+                    </h2>
+                    <div class="view-controls">
+                        <select id="pluginFilter" class="filter-select">
+                            <option value="">All Plugins</option>
+                        </select>
+                        <select id="tierFilter" class="filter-select">
+                            <option value="">All Tiers</option>
+                            <option value="hot">Hot Storage</option>
+                            <option value="warm">Warm Storage</option>
+                            <option value="cold">Cold Storage</option>
+                            <option value="vault">Vault</option>
+                        </select>
+                        <button class="btn btn-secondary" id="refreshFiles">
+                            <svg class="icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                            </svg>
+                            Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <div class="file-browser">
+                    <div class="file-grid" id="fileGrid">
+                        <!-- Dynamic file items -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Memories Section -->
+            <section id="memories-section" class="content-section">
+                <div class="section-header">
+                    <h2>
+                        <svg class="icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                        Memory Archive
+                    </h2>
+                    <div class="view-controls">
+                        <select id="memoryTypeFilter" class="filter-select">
+                            <option value="">All Types</option>
+                        </select>
+                        <input type="text" id="memorySearch" class="search-input" placeholder="Search memories...">
+                    </div>
+                </div>
+
+                <div class="memories-container">
+                    <div class="memory-timeline" id="memoryTimeline">
+                        <!-- Dynamic memory items -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Section -->
+            <section id="search-section" class="content-section">
+                <div class="section-header">
+                    <h2>
+                        <svg class="icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        Universal Search
+                    </h2>
+                    <p>Search across all files and memories in your archive</p>
+                </div>
+
+                <div class="search-container">
+                    <div class="search-box">
+                        <input type="text" id="universalSearch" class="search-input large" 
+                               placeholder="Search files, memories, or ask Archie anything...">
+                        <button class="btn btn-primary" id="searchBtn">
+                            <svg class="icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                            Search
+                        </button>
+                    </div>
+
+                    <div class="search-filters">
+                        <label><input type="checkbox" id="searchFiles" checked> Files</label>
+                        <label><input type="checkbox" id="searchMemories" checked> Memories</label>
+                        <label><input type="checkbox" id="searchMetadata"> Metadata</label>
+                    </div>
+
+                    <div class="search-results" id="searchResults">
+                        <!-- Dynamic search results -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- System Section -->
+            <section id="system-section" class="content-section">
+                <div class="section-header">
+                    <h2>
+                        <svg class="icon-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        System Management
+                    </h2>
+                    <p>Monitor and maintain your ArchieOS installation</p>
+                </div>
+
+                <div class="system-grid">
+                    <div class="system-card">
+                        <h3>
+                            <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                            </svg>
+                            Backup Management
+                        </h3>
+                        <div class="backup-controls">
+                            <button class="btn btn-secondary" id="backupMemory">Backup Memory</button>
+                            <button class="btn btn-secondary" id="backupPlugins">Backup Plugins</button>
+                            <button class="btn btn-primary" id="backupFull">Full Backup</button>
+                        </div>
+                        <div id="backupStatus" class="status-text"></div>
+                    </div>
+
+                    <div class="system-card">
+                        <h3>
+                            <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-.42-.297l-.438-2.22a2 2 0 00-1.96-1.607H9.798a2 2 0 00-1.96 1.607l-.438 2.22a5.993 5.993 0 00-.42.297l-2.386.477a2 2 0 00-1.023.547 2 2 0 00-.607 1.022l-.477 2.387a6 6 0 00.297.42l2.22.438a2 2 0 001.607 1.96h3.803a2 2 0 001.607-1.96l.438-2.22a5.993 5.993 0 00.297-.42l2.386-.477a2 2 0 001.023-.547 2 2 0 00.607-1.022z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            Storage Maintenance
+                        </h3>
+                        <div class="maintenance-controls">
+                            <button class="btn btn-secondary" id="cleanTemp">Clean Temp Files</button>
+                            <button class="btn btn-secondary" id="pruneCycle">Run Pruning</button>
+                            <button class="btn btn-warning" id="analyzeStorage">Analyze Storage</button>
+                        </div>
+                        <div id="maintenanceStatus" class="status-text"></div>
+                    </div>
+
+                    <div class="system-card">
+                        <h3>
+                            <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                            System Statistics
+                        </h3>
+                        <div class="stats-display" id="systemStats">
+                            <!-- Dynamic system stats -->
+                        </div>
+                    </div>
+
+                    <div class="system-card">
+                        <h3>
+                            <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                            Security Status
+                        </h3>
+                        <div class="security-display" id="securityStatus">
+                            <!-- Security information -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>
+                    <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                    </svg>
+                    Upload Files to ArchieOS
+                </h3>
+                <button class="modal-close" id="closeUpload">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">
+                        <svg class="icon-xl" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                    </div>
+                    <p>Drag and drop files here, or click to browse</p>
+                    <input type="file" id="fileInput" multiple accept="*/*" hidden>
+                    <button class="btn btn-secondary" id="browseFiles">Browse Files</button>
+                </div>
+
+                <div class="upload-options">
+                    <div class="form-group">
+                        <label for="uploadPlugin">Plugin:</label>
+                        <select id="uploadPlugin" class="form-control">
+                            <option value="">General Storage</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="uploadTier">Storage Tier:</label>
+                        <select id="uploadTier" class="form-control">
+                            <option value="hot">Hot (Active)</option>
+                            <option value="warm">Warm (Regular)</option>
+                            <option value="cold">Cold (Archive)</option>
+                            <option value="vault">Vault (Secure)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="uploadTags">Tags (comma-separated):</label>
+                        <input type="text" id="uploadTags" class="form-control" placeholder="important, project, document">
+                    </div>
+                </div>
+
+                <div class="upload-progress" id="uploadProgress" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">Uploading...</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelUpload">Cancel</button>
+                <button class="btn btn-primary" id="startUpload">Upload Files</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner">
+            <svg class="icon-xl" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
+        </div>
+        <div class="loading-text">Archie is thinking...</div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="/static/js/archivist.js"></script>
+</body>
+</html>

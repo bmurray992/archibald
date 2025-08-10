@@ -1,0 +1,51 @@
+{
+  "backup_date": "2025-08-05",
+  "timestamp": "2025-08-05T12:13:04.907902",
+  "configs": {
+    "auth_tokens.json": {
+      "tokens": {
+        "percy": {
+          "token_hash": "cdc551c9d48b2616dc84cc20f8b98ce9d45f5b5f52343c33a2b7a788367cdcd7",
+          "permissions": [
+            "read",
+            "write",
+            "delete"
+          ],
+          "created_at": "2025-08-05T10:12:03.300506",
+          "last_used": null,
+          "active": true,
+          "description": "Percy's primary access token"
+        },
+        "test_client": {
+          "token_hash": "881a57db1ff95ac1a9463282de7986816c5e5608487d97b550796cd4a098eb7e",
+          "permissions": [
+            "read",
+            "write"
+          ],
+          "created_at": "2025-08-05T10:12:03.300656",
+          "last_used": "2025-08-05T10:12:03.300739",
+          "active": false,
+          "description": "Test client for comprehensive system test",
+          "revoked_at": "2025-08-05T10:12:03.396078"
+        },
+        "admin_session_20250805_112118": {
+          "token_hash": "a16a92bb9de852a3d7e3853baadb2650a3e22a586345086110a59ee7686b83fc",
+          "permissions": [
+            "read",
+            "write",
+            "delete"
+          ],
+          "created_at": "2025-08-05T11:21:18.209241",
+          "last_used": null,
+          "active": true,
+          "description": "Web session for Archive Administrator"
+        }
+      },
+      "settings": {
+        "token_expiry_hours": 8760,
+        "max_failed_attempts": 5,
+        "lockdown_duration_minutes": 15
+      }
+    }
+  }
+}

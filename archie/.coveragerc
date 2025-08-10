@@ -1,0 +1,125 @@
+[run]
+# Coverage.py configuration for ArchieOS
+
+# Source code to measure
+source = archie_core, api
+
+# Files to omit from coverage
+omit = 
+    # Test files
+    tests/*
+    test_*.py
+    *_test.py
+    
+    # Virtual environment
+    .venv/*
+    venv/*
+    */site-packages/*
+    
+    # Migration scripts (run once)
+    migrations/*
+    
+    # Development and deployment scripts
+    run_*.py
+    deploy*.py
+    setup*.py
+    
+    # Legacy test files
+    test_archie.py
+    test_archie_os.py
+    test_api_startup.py
+    test_full_archie_os.py
+    test_runner.py
+    
+    # Auto-generated files
+    */migrations/*
+    */__pycache__/*
+    
+    # Configuration files
+    */config/*
+    
+    # External dependencies in project
+    */external/*
+
+# Include patterns (override omit for important files)
+include = 
+    archie_core/*
+    api/*
+
+# Parallel processing
+parallel = true
+
+# Branch coverage
+branch = true
+
+# Coverage data file
+data_file = .coverage
+
+[report]
+# Reporting configuration
+
+# Skip files with no executable code
+skip_empty = true
+
+# Skip covered files
+skip_covered = false
+
+# Show missing line numbers
+show_missing = true
+
+# Number precision for percentages
+precision = 2
+
+# Sort by name
+sort = Name
+
+# Exclude lines from coverage
+exclude_lines =
+    # Standard pragma
+    pragma: no cover
+    
+    # Don't complain about missing debug-only code
+    def __repr__
+    def __str__
+    
+    # Don't complain if tests don't hit defensive assertion code
+    raise AssertionError
+    raise NotImplementedError
+    
+    # Don't complain if non-runnable code isn't run
+    if __name__ == .__main__.
+    
+    # Don't complain about abstract methods
+    @abstractmethod
+    
+    # Don't complain about type checking imports
+    if TYPE_CHECKING:
+    
+    # Don't complain about platform specific code
+    if sys.platform
+    
+    # Don't complain about version checks
+    if sys.version_info
+    
+    # Don't complain about logging debug statements
+    logger.debug
+    
+    # Don't complain about pass statements in stubs
+    pass
+
+# Ignore errors for missing source files
+ignore_errors = true
+
+[html]
+# HTML report configuration
+directory = htmlcov
+title = ArchieOS Test Coverage Report
+
+[xml]
+# XML report configuration  
+output = coverage.xml
+
+[json]
+# JSON report configuration
+output = coverage.json
+pretty_print = true

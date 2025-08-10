@@ -1,0 +1,94 @@
+{
+  "backup_date": "2025-08-05",
+  "timestamp": "2025-08-05T12:13:04.901748",
+  "components": {
+    "memory": {
+      "success": true,
+      "file_count": 1,
+      "size_bytes": 114688,
+      "backup_path": "/Users/bryanmurray/Desktop/Projects/archibald/archie/storage/memory/memory_backup_20250805.db",
+      "message": "Memory database backed up to memory_backup_20250805.db"
+    },
+    "plugins": {
+      "success": true,
+      "plugins_backed_up": 8,
+      "total_files": 0,
+      "size_bytes": 959,
+      "plugin_details": {
+        "journal": {
+          "success": true,
+          "file_count": 0,
+          "size_bytes": 120,
+          "backup_path": "/Users/bryanmurray/Desktop/Projects/archibald/archie/storage/plugins/journal/backups/journal_backup_20250805.json",
+          "message": "Plugin journal backed up successfully"
+        },
+        "research": {
+          "success": true,
+          "file_count": 0,
+          "size_bytes": 121,
+          "backup_path": "/Users/bryanmurray/Desktop/Projects/archibald/archie/storage/plugins/research/backups/research_backup_20250805.json",
+          "message": "Plugin research backed up successfully"
+        },
+        "tasks": {
+          "success": true,
+          "file_count": 0,
+          "size_bytes": 118,
+          "backup_path": "/Users/bryanmurray/Desktop/Projects/archibald/archie/storage/plugins/tasks/backups/tasks_backup_20250805.json",
+          "message": "Plugin tasks backed up successfully"
+        },
+        "calendar": {
+          "success": true,
+          "file_count": 0,
+          "size_bytes": 121,
+          "backup_path": "/Users/bryanmurray/Desktop/Projects/archibald/archie/storage/plugins/calendar/backups/calendar_backup_20250805.json",
+          "message": "Plugin calendar backed up successfully"
+        },
+        "health": {
+          "success": true,
+          "file_count": 0,
+          "size_bytes": 119,
+          "backup_path": "/Users/bryanmurray/Desktop/Projects/archibald/archie/storage/plugins/health/backups/health_backup_20250805.json",
+          "message": "Plugin health backed up successfully"
+        },
+        "finance": {
+          "success": true,
+          "file_count": 0,
+          "size_bytes": 120,
+          "backup_path": "/Users/bryanmurray/Desktop/Projects/archibald/archie/storage/plugins/finance/backups/finance_backup_20250805.json",
+          "message": "Plugin finance backed up successfully"
+        },
+        "reminders": {
+          "success": true,
+          "file_count": 0,
+          "size_bytes": 122,
+          "backup_path": "/Users/bryanmurray/Desktop/Projects/archibald/archie/storage/plugins/reminders/backups/reminders_backup_20250805.json",
+          "message": "Plugin reminders backed up successfully"
+        },
+        "media": {
+          "success": true,
+          "file_count": 0,
+          "size_bytes": 118,
+          "backup_path": "/Users/bryanmurray/Desktop/Projects/archibald/archie/storage/plugins/media/backups/media_backup_20250805.json",
+          "message": "Plugin media backed up successfully"
+        }
+      },
+      "message": "Backed up 8 plugins"
+    },
+    "files": {
+      "success": true,
+      "file_count": 1,
+      "size_bytes": 45056,
+      "backup_path": "/Users/bryanmurray/Desktop/Projects/archibald/archie/storage/memory/files_metadata_backup_20250805.db",
+      "message": "File metadata backed up to files_metadata_backup_20250805.db"
+    },
+    "config": {
+      "success": true,
+      "file_count": 1,
+      "size_bytes": 1570,
+      "backup_path": "/Users/bryanmurray/Desktop/Projects/archibald/archie/storage/memory/config_backup_20250805.json",
+      "message": "System config backed up successfully"
+    }
+  },
+  "success": true,
+  "errors": []
+}

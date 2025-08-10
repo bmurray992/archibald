@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archie Memory Vault - Secure Access</title>
+    <link rel="stylesheet" href="/static/css/archivist.css">
+    <link rel="icon" href="/static/images/archie-logo-color.svg" type="image/svg+xml">
+</head>
+<body class="login-body">
+    <!-- Analytical Background Pattern -->
+    <div class="archie-bg-pattern"></div>
+    
+    <!-- Data Visualization Overlay -->
+    <div class="data-viz-overlay">
+        <div class="floating-data-point" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+        <div class="floating-data-point" style="left: 80%; top: 15%; animation-delay: 1s;"></div>
+        <div class="floating-data-point" style="left: 65%; top: 75%; animation-delay: 2s;"></div>
+        <div class="floating-data-point" style="left: 20%; top: 80%; animation-delay: 0.5s;"></div>
+        <div class="floating-data-point" style="left: 90%; top: 60%; animation-delay: 1.5s;"></div>
+    </div>
+
+    <div class="login-container">
+        <div class="login-card">
+            <!-- Logo Section with Analytics Enhancement -->
+            <div class="login-logo">
+                <div class="logo-container">
+                    <img src="/static/images/archie-logo-color.svg" alt="Archie Memory Vault" class="login-logo-image">
+                    <div class="logo-glow-effect"></div>
+                </div>
+                <div class="login-logo-text">
+                    <h1>Archie Memory Vault</h1>
+                    <p>AI-Powered Digital Archive & Intelligence</p>
+                    <!-- Real-time system status -->
+                    <div class="system-status-indicator">
+                        <div class="status-dot"></div>
+                        <span>Analytics Engine: Active</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <form class="login-form" id="loginForm" method="post" action="/auth/login">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" id="username" name="username" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" name="password" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe" name="rememberMe" class="form-checkbox">
+                        <span class="checkbox-text">Remember me for 30 days</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">
+                    <svg class="icon-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                    Access Memory Vault
+                </button>
+            </form>
+
+            <!-- Security Notice -->
+            <div class="security-notice">
+                <svg class="icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                </svg>
+                <span>Your digital memories are protected with enterprise-grade security</span>
+            </div>
+
+            <!-- Error Display -->
+            <div id="loginError" class="error-message" style="display: none;">
+                <svg class="icon-xs" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.864-.833-2.634 0L4.168 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+                </svg>
+                <span id="errorText"></span>
+            </div>
+        </div>
+
+        <!-- Status Information -->
+        <div class="login-status">
+            <div class="status-item">
+                <span class="status-indicator online"></span>
+                <span>Vault Systems Online</span>
+            </div>
+            <div class="status-item">
+                <span class="status-indicator secure"></span>
+                <span>Encrypted Connection</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const loginData = {
+                username: formData.get('username'),
+                password: formData.get('password'),
+                rememberMe: formData.get('rememberMe') === 'on'
+            };
+
+            try {
+                const response = await fetch('/auth/login-simple', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(loginData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Store auth token
+                    localStorage.setItem('archie_token', result.token);
+                    // Redirect to dashboard
+                    window.location.href = '/web/archivist';
+                } else {
+                    // Show error
+                    document.getElementById('errorText').textContent = result.message || 'Login failed';
+                    document.getElementById('loginError').style.display = 'flex';
+                }
+            } catch (error) {
+                document.getElementById('errorText').textContent = 'Connection error. Please try again.';
+                document.getElementById('loginError').style.display = 'flex';
+            }
+        });
+    </script>
+</body>
+</html>
